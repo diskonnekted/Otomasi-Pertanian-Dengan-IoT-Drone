@@ -336,6 +336,16 @@ async def get_dashboard_summary():
         drone_fleet=[DroneData(**drone) for drone in drone_fleet]
     )
 
+# Clear all data for fresh simulation
+@api_router.delete("/clear-data")
+async def clear_all_data():
+    """Clear all data for fresh simulation"""
+    await db.sensor_data.delete_many({})
+    await db.farm_zones.delete_many({})
+    await db.irrigation_systems.delete_many({})
+    await db.drones.delete_many({})
+    return {"message": "All data cleared"}
+
 @api_router.post("/simulate-data")
 async def simulate_sensor_data():
     """Generate sample sensor data for testing"""
