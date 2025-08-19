@@ -21,7 +21,38 @@ Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monito
 - **Lokasi**: Desa Jenggawur, Kabupaten Banjarnegara, Jawa Tengah
 - **Koordinat**: -7.392220°, 109.677500°
 
-## 📷 **Screenshots**
+## 📷 **Lihat Aplikasi Live**
+
+### 🌐 **Demo Langsung**: [https://farm-sense-control.preview.emergentagent.com](https://farm-sense-control.preview.emergentagent.com)
+
+**Fitur yang Bisa Dilihat Langsung:**
+
+### 📊 Dashboard Overview
+- **7 Sensor Cards** dengan real-time data (pH Tanah, Kalium, Kelembaban Tanah, Suhu, Nitrogen, Kelembaban Udara, Fosfor)
+- **Alert System** dengan color coding (Hijau=Normal, Kuning=Warning, Merah=Critical)
+- **Header Info** menampilkan "Smart Farm Desa Jenggawur - Kabupaten Banjarnegara, Jawa Tengah"
+
+### 📈 Interactive Charts
+- **Trend Kelembaban Tanah (24 Jam)** - Chart biru dengan data hourly
+- **Trend Nutrisi Tanaman (24 Jam)** - Multi-line chart untuk N-P-K dengan warna berbeda
+
+### 🗺️ Live Drone Map
+- **Peta Desa Jenggawur** dengan koordinat real (-7.392220°, 109.677500°)
+- **3 Drone Markers** dengan battery indicators dan status warna
+- **Flight Paths** menunjukkan jalur terbang dengan garis putus-putus
+- **Interactive Popups** untuk detail drone saat di-click
+
+### 💧 Control Systems
+- **Sistem Irigasi Pertanian** - Kontrol per zona dengan tombol aktivasi
+- **Armada Drone** - Management drone dengan tombol "Kirim Misi"
+- **Real-time Status Updates** untuk irrigation dan drone operations
+
+### 📱 Mobile Responsive
+- **Auto-adaptive layout** untuk smartphone dan tablet
+- **Touch-friendly controls** untuk penggunaan di lapangan
+- **Optimized performance** untuk koneksi mobile
+
+**🔄 Testing**: Klik tombol "Generate Data Test" untuk membuat data simulasi baru!
 
 ## 🛠 **Tech Stack**
 
