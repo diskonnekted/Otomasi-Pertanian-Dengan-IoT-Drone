@@ -1,94 +1,129 @@
 {
   "summary": {
-    "passed": 12,
+    "passed": 17,
     "failed": 0,
-    "total": 12
+    "total": 17
   },
   "results": [
     {
       "test": "Root Endpoint",
       "success": true,
       "message": "Root endpoint accessible and returns correct message",
-      "timestamp": "2025-08-19T22:23:32.011224",
+      "timestamp": "2025-08-19T22:56:41.542385",
       "details": null
     },
     {
-      "test": "Simulate Data",
+      "test": "Integration Flow",
       "success": true,
-      "message": "Sample data generated successfully. Created 21 sensors",
-      "timestamp": "2025-08-19T22:23:32.583059",
+      "message": "Complete integration flow successful: cleared data, generated fresh simulation, verified 24 hours of historical data, 3 drone positions, and dashboard with 3 zones",
+      "timestamp": "2025-08-19T22:56:47.786604",
       "details": null
     },
     {
       "test": "Get Zones",
       "success": true,
       "message": "Retrieved 3 zones with proper structure and thresholds",
-      "timestamp": "2025-08-19T22:23:33.139826",
+      "timestamp": "2025-08-19T22:56:48.409142",
       "details": null
     },
     {
       "test": "Get Sensors",
       "success": true,
-      "message": "Retrieved 42 sensors with all expected types. Alert levels: 4 critical, 3 warning",
-      "timestamp": "2025-08-19T22:23:33.697980",
+      "message": "Retrieved 100 sensors with all expected types. Alert levels: 9 critical, 7 warning",
+      "timestamp": "2025-08-19T22:56:48.972798",
       "details": null
     },
     {
       "test": "Sensor Alert Logic",
       "success": true,
-      "message": "Alert logic working correctly. Critical: 4, Warning: 3",
-      "timestamp": "2025-08-19T22:23:34.253569",
+      "message": "Alert logic working correctly. Critical: 9, Warning: 7",
+      "timestamp": "2025-08-19T22:56:49.526315",
+      "details": null
+    },
+    {
+      "test": "Historical Data Default",
+      "success": true,
+      "message": "Retrieved 24 hourly data points for 24 hours with realistic trends. Sensor fields: ['soil_moisture', 'nutrient_n', 'nutrient_p', 'nutrient_k']",
+      "timestamp": "2025-08-19T22:56:50.082345",
+      "details": null
+    },
+    {
+      "test": "Historical Data Custom Hours",
+      "success": true,
+      "message": "Retrieved 12 data points for 12 hours with proper hourly intervals",
+      "timestamp": "2025-08-19T22:56:50.635267",
+      "details": null
+    },
+    {
+      "test": "Historical Data Zone Filter",
+      "success": true,
+      "message": "Retrieved 24 data points filtered by zone c2f9377e-13c6-4990-b4f9-d4774a06e59b",
+      "timestamp": "2025-08-19T22:56:51.192006",
+      "details": null
+    },
+    {
+      "test": "Drone Positions API",
+      "success": true,
+      "message": "Retrieved 3 drone positions with valid coordinates and battery levels",
+      "timestamp": "2025-08-19T22:56:51.744505",
       "details": null
     },
     {
       "test": "Get Irrigation",
       "success": true,
-      "message": "Retrieved 3 irrigation systems with valid statuses: {'idle', 'scheduled'}",
-      "timestamp": "2025-08-19T22:23:34.807939",
+      "message": "Retrieved 3 irrigation systems with valid statuses: {'scheduled', 'idle'}",
+      "timestamp": "2025-08-19T22:56:52.293610",
       "details": null
     },
     {
       "test": "Activate Irrigation",
       "success": true,
       "message": "Irrigation system activated successfully with duration 15 minutes",
-      "timestamp": "2025-08-19T22:23:36.414298",
+      "timestamp": "2025-08-19T22:56:53.949743",
       "details": null
     },
     {
       "test": "Activate Irrigation Invalid ID",
       "success": true,
       "message": "Correctly returned 404 for invalid irrigation system ID",
-      "timestamp": "2025-08-19T22:23:36.970289",
+      "timestamp": "2025-08-19T22:56:54.505452",
       "details": null
     },
     {
       "test": "Get Drones",
       "success": true,
-      "message": "Retrieved 2 drones with valid statuses: {'idle', 'charging'}",
-      "timestamp": "2025-08-19T22:23:37.542522",
+      "message": "Retrieved 3 drones with valid statuses: {'charging', 'in_flight', 'idle'}",
+      "timestamp": "2025-08-19T22:56:55.068198",
       "details": null
     },
     {
       "test": "Drone Mission",
       "success": true,
       "message": "Drone mission assigned successfully. Status changed to in_flight",
-      "timestamp": "2025-08-19T22:23:39.146213",
+      "timestamp": "2025-08-19T22:56:56.678819",
       "details": null
     },
     {
       "test": "Drone Mission Invalid ID",
       "success": true,
       "message": "Correctly returned 404 for invalid drone ID",
-      "timestamp": "2025-08-19T22:23:39.704792",
+      "timestamp": "2025-08-19T22:56:57.230213",
       "details": null
     },
     {
       "test": "Dashboard Summary",
       "success": true,
-      "message": "Dashboard summary retrieved successfully. Zones: 3, Active Irrigation: 1, Active Drones: 1, Critical Alerts: 4",
-      "timestamp": "2025-08-19T22:23:40.264346",
+      "message": "Dashboard summary retrieved successfully. Zones: 3, Active Irrigation: 1, Active Drones: 2, Critical Alerts: 72",
+      "timestamp": "2025-08-19T22:56:57.792641",
+      "details": null
+    },
+    {
+      "test": "Clear Data API",
+      "success": true,
+      "message": "Successfully cleared all data. Before: 100 sensors, 3 zones. After: all collections empty",
+      "timestamp": "2025-08-19T22:57:00.681726",
       "details": null
     }
   ],
-  "timestamp": "2025-08-19T22:23:40.766205"
+  "timestamp": "2025-08-19T22:57:01.193733"
 }
