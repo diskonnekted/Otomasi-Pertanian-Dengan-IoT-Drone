@@ -21,51 +21,23 @@ Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monito
 - **Lokasi**: Desa Jenggawur, Kabupaten Banjarnegara, Jawa Tengah
 - **Koordinat**: -7.392220°, 109.677500°
 
-## 🛠 **Tech Stack**
-
-### Backend
-- **FastAPI** - Modern Python web framework
-- **MongoDB** - NoSQL database untuk sensor data
-- **Pydantic** - Data validation dan serialization
-- **Motor** - Async MongoDB driver
-
-### Frontend
-- **React.js** - Modern JavaScript framework
-- **Recharts** - Interactive charts library
-- **Leaflet** - Interactive maps dengan OpenStreetMap
-- **Tailwind CSS** - Utility-first CSS framework
-- **Axios** - HTTP client untuk API calls
-
-## 📚 **Dokumentasi Lengkap**
-
-| Dokumen | Deskripsi | Link |
-|---------|-----------|------|
-| **Installation Guide** | Panduan install lengkap step-by-step | [📖 docs/INSTALLATION.md](docs/INSTALLATION.md) |
-| **Deployment Guide** | Deploy ke berbagai platform hosting | [🚀 docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
-| **Hardware Integration** | Arduino/ESP32 integration guide | [🔧 docs/HARDWARE.md](docs/HARDWARE.md) |
-| **API Documentation** | Complete API reference | [📊 docs/API.md](docs/API.md) |
-
 ## 📷 **Screenshots**
 
 ### Dashboard Overview
-![Dashboard](docs/dashboard_overview.png)
-*Real-time sensor monitoring dengan alert system*
+Akses langsung ke [Live Demo](https://farm-sense-control.preview.emergentagent.com) untuk melihat:
+- *Real-time sensor monitoring dengan alert system*
 
-### Interactive Charts
-![Charts](docs/charts_section.png)
-*Trend analysis untuk kelembaban tanah dan nutrisi tanaman*
+### Interactive Charts  
+- *Trend analysis untuk kelembaban tanah dan nutrisi tanaman*
 
 ### Live Drone Map
-![Map](docs/map_section.png)
-*Peta real-time dengan tracking drone dan flight paths*
+- *Peta real-time dengan tracking drone dan flight paths*
 
 ### Control Systems
-![Controls](docs/controls_section.png)
-*Sistem kontrol irigasi dan drone management*
+- *Sistem kontrol irigasi dan drone management*
 
 ### Mobile Responsive
-![Mobile](docs/mobile_view.png)
-*Tampilan mobile-friendly untuk monitoring di lapangan*
+- *Tampilan mobile-friendly untuk monitoring di lapangan*
 
 ## 📁 **Project Structure**
 
