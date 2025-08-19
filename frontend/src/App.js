@@ -340,6 +340,8 @@ const DroneCard = ({ drone, onSendMission }) => {
 
 const SmartFarmDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
+  const [historicalData, setHistoricalData] = useState(null);
+  const [dronePositions, setDronePositions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -353,6 +355,24 @@ const SmartFarmDashboard = () => {
       console.error('Dashboard error:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchHistoricalData = async () => {
+    try {
+      const response = await axios.get(`${API}/sensors/historical?hours=24`);
+      setHistoricalData(response.data.data);
+    } catch (err) {
+      console.error('Historical data error:', err);
+    }
+  };
+
+  const fetchDronePositions = async () => {
+    try {
+      const response = await axios.get(`${API}/drones/positions`);
+      setDronePositions(response.data.drones);
+    } catch (err) {
+      console.error('Drone positions error:', err);
     }
   };
 
