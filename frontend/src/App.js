@@ -120,8 +120,8 @@ const DroneMap = ({ dronePositions }) => {
       <h3 className="text-lg font-semibold text-gray-900 mb-4">🗺️ Peta Drone Real-time</h3>
       <div className="h-80 rounded-lg overflow-hidden border">
         <MapContainer 
-          center={[-6.2088, 106.8456]} 
-          zoom={15} 
+          center={[-7.392220, 109.677500]} 
+          zoom={16} 
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
