@@ -398,12 +398,12 @@ const SmartFarmDashboard = () => {
 
   const sendDroneMission = async (droneId) => {
     try {
-      // Sample coordinates for mission
+      # Sample coordinates for mission (around Desa Jenggawur area)
       await axios.put(`${API}/drones/${droneId}/mission`, null, {
         params: {
-          target_lat: -6.2088 + (Math.random() - 0.5) * 0.01,
-          target_lng: 106.8456 + (Math.random() - 0.5) * 0.01,
-          payload_type: 'water'
+          target_lat: -7.392220 + (Math.random() - 0.5) * 0.005,
+          target_lng: 109.677500 + (Math.random() - 0.5) * 0.005,
+          payload_type: 'air'
         }
       });
       fetchDashboardData();
