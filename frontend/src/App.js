@@ -542,6 +542,31 @@ const SmartFarmDashboard = () => {
           </div>
         </div>
 
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {historicalData && historicalData.length > 0 && (
+            <>
+              <SensorChart
+                title="📈 Trend Kelembaban Tanah (24 Jam)"
+                data={historicalData}
+                dataKeys={['soil_moisture']}
+                colors={['#3b82f6']}
+              />
+              <SensorChart
+                title="📊 Trend Nutrisi Tanaman (24 Jam)"
+                data={historicalData}
+                dataKeys={['nutrient_n', 'nutrient_p', 'nutrient_k']}
+                colors={['#10b981', '#f59e0b', '#ef4444']}
+              />
+            </>
+          )}
+        </div>
+
+        {/* Map Section */}
+        <div className="mb-8">
+          <DroneMap dronePositions={dronePositions} />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Irrigation Systems */}
           <div>
