@@ -571,7 +571,7 @@ const SmartFarmDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Irrigation Systems */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">💧 Sistem Pemupukan Otomatis</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">💧 Sistem Irigasi Pertanian</h2>
             <div className="space-y-4">
               {dashboardData?.irrigation_systems.map((system, index) => (
                 <IrrigationControl
