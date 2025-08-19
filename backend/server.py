@@ -366,9 +366,9 @@ async def simulate_sensor_data():
     if not zones:
         # Create sample zones first
         sample_zones = [
-            FarmZone(zone_name="Zone A - Tomat", area_size=2.5, crop_type="Tomat", latitude=-6.2088, longitude=106.8456, irrigation_threshold={"soil_moisture": 30, "nutrient_n": 50}),
-            FarmZone(zone_name="Zone B - Cabai", area_size=1.8, crop_type="Cabai", latitude=-6.2090, longitude=106.8460, irrigation_threshold={"soil_moisture": 25, "nutrient_n": 45}),
-            FarmZone(zone_name="Zone C - Selada", area_size=3.2, crop_type="Selada", latitude=-6.2085, longitude=106.8465, irrigation_threshold={"soil_moisture": 35, "nutrient_n": 40}),
+            FarmZone(zone_name="Zone A - Padi Sawah", area_size=2.5, crop_type="Padi", latitude=-7.392220, longitude=109.677500, irrigation_threshold={"soil_moisture": 35, "nutrient_n": 50}),
+            FarmZone(zone_name="Zone B - Jagung", area_size=1.8, crop_type="Jagung", latitude=-7.391500, longitude=109.678200, irrigation_threshold={"soil_moisture": 30, "nutrient_n": 45}),
+            FarmZone(zone_name="Zone C - Cabai Rawit", area_size=3.2, crop_type="Cabai Rawit", latitude=-7.393100, longitude=109.676800, irrigation_threshold={"soil_moisture": 25, "nutrient_n": 40}),
         ]
         
         for zone in sample_zones:
