@@ -2,6 +2,22 @@
 
 > Sistem monitoring smart farm real-time dengan IoT sensors, automated irrigation, dan drone control untuk Desa Jenggawur, Kabupaten Banjarnegara, Jawa Tengah.
 
+## 🎯 **Quick Start Demo**
+
+### 🌐 **Langsung Akses Live System:**
+**Demo URL**: [https://farm-sense-control.preview.emergentagent.com](https://farm-sense-control.preview.emergentagent.com)
+
+### 🚀 **Cara Test System:**
+1. **Buka link demo** di atas
+2. **Tunggu loading** sampai dashboard muncul  
+3. **Klik "Generate Data Test"** untuk create sample data
+4. **Explore fitur:**
+   - Scroll ke bawah untuk lihat **charts trend 24 jam**
+   - Lihat **peta drone** dengan markers interaktif
+   - Test **kontrol irrigation** dan **drone missions**
+
+---
+
 ## 📋 **Deskripsi Project**
 
 Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monitoring dan kontrol sistem pertanian otomatis dengan fitur:
