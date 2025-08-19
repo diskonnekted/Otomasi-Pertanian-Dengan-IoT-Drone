@@ -243,13 +243,12 @@ async def send_drone_mission(drone_id: str, target_lat: float, target_lng: float
         raise HTTPException(status_code=404, detail="Drone not found")
     return {"message": "Mission assigned to drone", "target": {"lat": target_lat, "lng": target_lng}}
 
-# Historical Data for Charts
 @api_router.get("/sensors/historical")
 async def get_historical_sensor_data(zone_id: Optional[str] = None, hours: int = 24):
     """Get historical sensor data for charts - hourly aggregated"""
     # Calculate time range
     end_time = datetime.now(timezone.utc)
-    start_time = end_time.replace(minute=0, second=0, microsecond=0) - timedelta(hours=hours)
+    start_time = end_time - timedelta(hours=hours)
     
     query = {"timestamp": {"$gte": start_time.isoformat(), "$lt": end_time.isoformat()}}
     if zone_id:
@@ -261,7 +260,16 @@ async def get_historical_sensor_data(zone_id: Optional[str] = None, hours: int =
     # Group data by hour and sensor type
     hourly_data = {}
     for sensor in sensors:
-        timestamp = datetime.fromisoformat(sensor["timestamp"].replace('Z', '+00:00'))
+        # Handle both string and datetime timestamp formats
+        timestamp_str = sensor["timestamp"]
+        if isinstance(timestamp_str, str):
+            if timestamp_str.endswith('Z'):
+                timestamp = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+            else:
+                timestamp = datetime.fromisoformat(timestamp_str)
+        else:
+            timestamp = timestamp_str
+            
         hour_key = timestamp.replace(minute=0, second=0, microsecond=0).isoformat()
         sensor_type = sensor["sensor_type"]
         
