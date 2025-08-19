@@ -243,6 +243,18 @@ backend:
         agent: "testing"
         comment: "GET /api/dashboard retrieves complete summary with all metrics and counts"
 
+  - task: "Clear Data API"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "DELETE /api/clear-data successfully clears all database collections (sensors, zones, irrigation, drones). Verified complete data removal and proper response message. Integration with simulate-data endpoint confirmed for fresh data generation workflow."
+
 frontend:
   - task: "Smart Farm Dashboard UI"
     implemented: true
