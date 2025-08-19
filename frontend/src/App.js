@@ -413,8 +413,18 @@ const SmartFarmDashboard = () => {
   };
 
   useEffect(() => {
-    fetchDashboardData();
-    const interval = setInterval(fetchDashboardData, 30000); // Refresh every 30 seconds
+    const loadAllData = async () => {
+      await fetchDashboardData();
+      await fetchHistoricalData();
+      await fetchDronePositions();
+    };
+    
+    loadAllData();
+    const interval = setInterval(() => {
+      fetchDashboardData();
+      fetchDronePositions(); // Update drone positions more frequently
+    }, 30000); // Refresh every 30 seconds
+    
     return () => clearInterval(interval);
   }, []);
 
