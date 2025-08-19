@@ -135,11 +135,14 @@ backend:
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "GET /api/sensors/historical endpoint added for chart data. Returns 24-hour hourly data with realistic patterns for soil moisture and nutrients"
+      - working: true
+        agent: "testing"
+        comment: "Comprehensive testing completed: Default 24-hour data retrieval works with realistic trends (moisture variation >5 units). Custom hours parameter (tested with 12h) returns correct data count with proper hourly intervals. Zone filtering works correctly. All response formats include required fields: time, soil_moisture, nutrient_n, nutrient_p, nutrient_k. Hourly aggregation verified with 1-hour intervals between data points."
 
   - task: "Drone Positions API"
     implemented: true
