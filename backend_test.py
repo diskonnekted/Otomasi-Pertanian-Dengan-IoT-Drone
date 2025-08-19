@@ -811,10 +811,14 @@ class SmartFarmTester:
         # Test sequence following the smart farm workflow
         tests = [
             ("Root Endpoint", self.test_root_endpoint),
-            ("Simulate Data", self.test_simulate_data),
+            ("Integration Flow", self.test_integration_flow),  # Test complete flow first
             ("Get Zones", self.test_get_zones),
             ("Get Sensors", self.test_get_sensors),
             ("Sensor Alert Logic", self.test_sensor_alert_logic),
+            ("Historical Data Default", self.test_historical_sensor_data_default),
+            ("Historical Data Custom Hours", self.test_historical_sensor_data_custom_hours),
+            ("Historical Data Zone Filter", self.test_historical_sensor_data_zone_filter),
+            ("Drone Positions API", self.test_drone_positions_api),
             ("Get Irrigation", self.test_get_irrigation),
             ("Activate Irrigation", self.test_activate_irrigation),
             ("Activate Irrigation Invalid ID", self.test_activate_irrigation_invalid_id),
@@ -822,6 +826,7 @@ class SmartFarmTester:
             ("Drone Mission", self.test_drone_mission),
             ("Drone Mission Invalid ID", self.test_drone_mission_invalid_id),
             ("Dashboard Summary", self.test_dashboard_summary),
+            ("Clear Data API", self.test_clear_data_api),
         ]
         
         passed = 0
