@@ -2,8 +2,6 @@
 
 > Sistem monitoring smart farm real-time dengan IoT sensors, automated irrigation, dan drone control untuk Desa Jenggawur, Kabupaten Banjarnegara, Jawa Tengah.
 
-![Smart Farm Dashboard](docs/dashboard_overview.png)
-
 ## 📋 **Deskripsi Project**
 
 Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monitoring dan kontrol sistem pertanian otomatis dengan fitur:
