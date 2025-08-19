@@ -150,11 +150,14 @@ backend:
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "GET /api/drones/positions endpoint added for map visualization. Returns drone positions, status, battery, and target coordinates"
+      - working: true
+        agent: "testing"
+        comment: "Comprehensive testing completed: API returns proper JSON structure with 'drones' array and 'last_updated' timestamp. Each drone includes required fields: id, name, status, battery (0-100%), payload, payload_type, position[lat,lng]. GPS coordinates validated for Jakarta area (-7 to -5 lat, 106-108 lng). Target coordinates properly included for in-flight drones. Battery levels are valid percentages. All 3 test drones returned with correct data structure."
 
   - task: "Farm Zones API"
     implemented: true
