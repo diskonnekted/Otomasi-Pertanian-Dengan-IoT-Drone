@@ -36,6 +36,15 @@ Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monito
 - **Tailwind CSS** - Utility-first CSS framework
 - **Axios** - HTTP client untuk API calls
 
+## 📚 **Dokumentasi Lengkap**
+
+| Dokumen | Deskripsi | Link |
+|---------|-----------|------|
+| **Installation Guide** | Panduan install lengkap step-by-step | [📖 docs/INSTALLATION.md](docs/INSTALLATION.md) |
+| **Deployment Guide** | Deploy ke berbagai platform hosting | [🚀 docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
+| **Hardware Integration** | Arduino/ESP32 integration guide | [🔧 docs/HARDWARE.md](docs/HARDWARE.md) |
+| **API Documentation** | Complete API reference | [📊 docs/API.md](docs/API.md) |
+
 ## 📷 **Screenshots**
 
 ### Dashboard Overview
