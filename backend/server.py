@@ -464,13 +464,13 @@ async def simulate_sensor_data():
     drone_count = await db.drones.count_documents({})
     if drone_count == 0:
         sample_drones = [
-            DroneData(drone_name="Drone-1", status=DroneStatus.IDLE, battery_level=85.0, 
-                     current_lat=-6.2088, current_lng=106.8456, payload_remaining=75.0, payload_type="water"),
-            DroneData(drone_name="Drone-2", status=DroneStatus.IN_FLIGHT, battery_level=65.0, 
-                     current_lat=-6.2090, current_lng=106.8460, target_lat=-6.2085, target_lng=106.8465,
-                     payload_remaining=90.0, payload_type="fertilizer"),
-            DroneData(drone_name="Drone-3", status=DroneStatus.CHARGING, battery_level=25.0, 
-                     current_lat=-6.2085, current_lng=106.8465, payload_remaining=100.0, payload_type="pesticide"),
+            DroneData(drone_name="Drone-Sawah-1", status=DroneStatus.IDLE, battery_level=85.0, 
+                     current_lat=-7.392220, current_lng=109.677500, payload_remaining=75.0, payload_type="air"),
+            DroneData(drone_name="Drone-Jagung-2", status=DroneStatus.IN_FLIGHT, battery_level=65.0, 
+                     current_lat=-7.391500, current_lng=109.678200, target_lat=-7.393100, target_lng=109.676800,
+                     payload_remaining=90.0, payload_type="pupuk_organik"),
+            DroneData(drone_name="Drone-Cabai-3", status=DroneStatus.CHARGING, battery_level=25.0, 
+                     current_lat=-7.393100, current_lng=109.676800, payload_remaining=100.0, payload_type="pestisida_organik"),
         ]
         for drone in sample_drones:
             await db.drones.insert_one(drone.dict())
