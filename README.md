@@ -23,21 +23,29 @@ Smart Farm Monitoring System adalah aplikasi web modern yang memungkinkan monito
 
 ## 📷 **Screenshots**
 
-### Dashboard Overview
-Akses langsung ke [Live Demo](https://farm-sense-control.preview.emergentagent.com) untuk melihat:
-- *Real-time sensor monitoring dengan alert system*
+## 🛠 **Tech Stack**
 
-### Interactive Charts  
-- *Trend analysis untuk kelembaban tanah dan nutrisi tanaman*
+### Backend
+- **FastAPI** - Modern Python web framework
+- **MongoDB** - NoSQL database untuk sensor data
+- **Pydantic** - Data validation dan serialization
+- **Motor** - Async MongoDB driver
 
-### Live Drone Map
-- *Peta real-time dengan tracking drone dan flight paths*
+### Frontend
+- **React.js** - Modern JavaScript framework
+- **Recharts** - Interactive charts library
+- **Leaflet** - Interactive maps dengan OpenStreetMap
+- **Tailwind CSS** - Utility-first CSS framework
+- **Axios** - HTTP client untuk API calls
 
-### Control Systems
-- *Sistem kontrol irigasi dan drone management*
+## 📚 **Dokumentasi Lengkap**
 
-### Mobile Responsive
-- *Tampilan mobile-friendly untuk monitoring di lapangan*
+| Dokumen | Deskripsi | Link |
+|---------|-----------|------|
+| **Installation Guide** | Panduan install lengkap step-by-step | [📖 docs/INSTALLATION.md](docs/INSTALLATION.md) |
+| **Deployment Guide** | Deploy ke berbagai platform hosting | [🚀 docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
+| **Hardware Integration** | Arduino/ESP32 integration guide | [🔧 docs/HARDWARE.md](docs/HARDWARE.md) |
+| **API Documentation** | Complete API reference | [📊 docs/API.md](docs/API.md) |
 
 ## 📁 **Project Structure**
 
