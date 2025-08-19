@@ -212,6 +212,9 @@ const DroneMap = ({ dronePositions }) => {
     </div>
   );
 };
+
+// Components
+const SensorCard = ({ title, value, unit, alertLevel, icon }) => {
   const getAlertColor = (level) => {
     switch (level) {
       case 'critical': return 'border-red-500 bg-red-50';
