@@ -17,8 +17,201 @@ L.Icon.Default.mergeOptions({
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Components
-const SensorCard = ({ title, value, unit, alertLevel, icon }) => {
+const SensorChart = ({ title, data, dataKeys, colors }) => {
+  const formatTime = (timeStr) => {
+    const date = new Date(timeStr);
+    return date.toLocaleTimeString('id-ID', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      hour12: false 
+    });
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-lg border shadow-sm">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis 
+              dataKey="time" 
+              tickFormatter={formatTime}
+              tick={{ fontSize: 12 }}
+              interval="preserveStartEnd"
+            />
+            <YAxis tick={{ fontSize: 12 }} />
+            <Tooltip 
+              labelFormatter={(value) => `Waktu: ${formatTime(value)}`}
+              formatter={(value, name) => [
+                `${value?.toFixed(1) || 0}`, 
+                name === 'soil_moisture' ? 'Kelembaban Tanah (%)' : 
+                name === 'nutrient_n' ? 'Nitrogen (ppm)' :
+                name === 'nutrient_p' ? 'Fosfor (ppm)' :
+                name === 'nutrient_k' ? 'Kalium (ppm)' : name
+              ]}
+            />
+            <Legend />
+            {dataKeys.map((key, index) => (
+              <Line 
+                key={key}
+                type="monotone" 
+                dataKey={key} 
+                stroke={colors[index]}
+                strokeWidth={2}
+                dot={{ r: 3 }}
+                activeDot={{ r: 5 }}
+                name={
+                  key === 'soil_moisture' ? 'Kelembaban Tanah' : 
+                  key === 'nutrient_n' ? 'Nitrogen' :
+                  key === 'nutrient_p' ? 'Fosfor' :
+                  key === 'nutrient_k' ? 'Kalium' : key
+                }
+              />
+            ))}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
+
+const DroneMap = ({ dronePositions }) => {
+  // Custom drone icons based on status
+  const getDroneIcon = (status, battery) => {
+    const getColor = () => {
+      if (status === 'in_flight' || status === 'spraying') return '#10b981'; // green
+      if (status === 'charging') return '#f59e0b'; // yellow
+      if (status === 'maintenance') return '#ef4444'; // red
+      return '#6b7280'; // gray
+    };
+
+    return L.divIcon({
+      html: `<div style="
+        background-color: ${getColor()};
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      ">
+        <div style="
+          position: absolute;
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0,0,0,0.7);
+          color: white;
+          padding: 2px 6px;
+          border-radius: 3px;
+          font-size: 10px;
+          white-space: nowrap;
+        ">🚁 ${battery.toFixed(0)}%</div>
+      </div>`,
+      className: 'drone-marker',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10]
+    });
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-lg border shadow-sm">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">🗺️ Peta Drone Real-time</h3>
+      <div className="h-80 rounded-lg overflow-hidden border">
+        <MapContainer 
+          center={[-6.2088, 106.8456]} 
+          zoom={15} 
+          style={{ height: '100%', width: '100%' }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          
+          {dronePositions?.map((drone, index) => (
+            <React.Fragment key={drone.id}>
+              {/* Drone position marker */}
+              <Marker 
+                position={drone.position} 
+                icon={getDroneIcon(drone.status, drone.battery)}
+              >
+                <Popup>
+                  <div className="text-sm">
+                    <div className="font-bold text-blue-600">{drone.name}</div>
+                    <div className="mt-1 space-y-1">
+                      <div>Status: <span className={`font-medium ${
+                        drone.status === 'in_flight' ? 'text-blue-600' :
+                        drone.status === 'spraying' ? 'text-green-600' :
+                        drone.status === 'charging' ? 'text-yellow-600' :
+                        drone.status === 'maintenance' ? 'text-red-600' : 'text-gray-600'
+                      }`}>{drone.status}</span></div>
+                      <div>Baterai: <span className={`font-medium ${
+                        drone.battery > 50 ? 'text-green-600' : 
+                        drone.battery > 20 ? 'text-yellow-600' : 'text-red-600'
+                      }`}>{drone.battery.toFixed(0)}%</span></div>
+                      <div>Muatan: {drone.payload.toFixed(0)}% ({drone.payload_type})</div>
+                      <div className="text-xs text-gray-500">
+                        Posisi: {drone.position[0].toFixed(4)}, {drone.position[1].toFixed(4)}
+                      </div>
+                    </div>
+                  </div>
+                </Popup>
+              </Marker>
+              
+              {/* Flight path to target */}
+              {drone.target && drone.target[0] && drone.target[1] && (
+                <>
+                  <Polyline 
+                    positions={[drone.position, drone.target]}
+                    color="#3b82f6"
+                    weight={2}
+                    opacity={0.7}
+                    dashArray="5, 10"
+                  />
+                  <Marker position={drone.target}>
+                    <Popup>
+                      <div className="text-sm">
+                        <div className="font-bold text-red-600">🎯 Target {drone.name}</div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          {drone.target[0].toFixed(4)}, {drone.target[1].toFixed(4)}
+                        </div>
+                      </div>
+                    </Popup>
+                  </Marker>
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </MapContainer>
+      </div>
+      
+      {/* Map legend */}
+      <div className="mt-3 flex flex-wrap gap-2 text-xs">
+        <div className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <span>Aktif/Penyiraman</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+          <span>Charging</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+          <span>Idle</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+          <span>Maintenance</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-3 h-3 border-2 border-blue-500 border-dashed bg-transparent rounded-full"></div>
+          <span>Jalur Terbang</span>
+        </div>
+      </div>
+    </div>
+  );
+};
   const getAlertColor = (level) => {
     switch (level) {
       case 'critical': return 'border-red-500 bg-red-50';
