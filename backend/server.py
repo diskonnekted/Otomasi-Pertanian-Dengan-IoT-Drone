@@ -328,7 +328,6 @@ async def get_dashboard_summary():
         drone_fleet=[DroneData(**drone) for drone in drone_fleet]
     )
 
-# Simulation endpoint for testing
 @api_router.post("/simulate-data")
 async def simulate_sensor_data():
     """Generate sample sensor data for testing"""
@@ -347,7 +346,8 @@ async def simulate_sensor_data():
         
         zones = await db.farm_zones.find().to_list(length=None)
     
-    # Generate sensor data for each zone
+    # Generate historical data for the last 24 hours
+    current_time = datetime.now(timezone.utc)
     sensor_types_config = [
         (SensorType.SOIL_MOISTURE, (15, 80), "%"),
         (SensorType.NUTRIENT_N, (20, 100), "ppm"),
@@ -359,27 +359,64 @@ async def simulate_sensor_data():
     ]
     
     created_sensors = []
-    for zone in zones:
-        for sensor_type, (min_val, max_val), unit in sensor_types_config:
-            value = random.uniform(min_val, max_val)
-            
-            # Determine alert level
-            alert_level = "normal"
-            if sensor_type == SensorType.SOIL_MOISTURE and value < 30:
-                alert_level = "critical" if value < 20 else "warning"
-            elif sensor_type in [SensorType.NUTRIENT_N, SensorType.NUTRIENT_P, SensorType.NUTRIENT_K] and value < 40:
-                alert_level = "critical" if value < 25 else "warning"
-            
-            sensor_data = SensorData(
-                zone_id=zone["id"],
-                sensor_type=sensor_type,
-                value=round(value, 1),
-                unit=unit,
-                alert_level=alert_level
-            )
-            
-            await db.sensor_data.insert_one(sensor_data.dict())
-            created_sensors.append(sensor_data)
+    
+    # Generate data for the last 24 hours (hourly)
+    for hour_offset in range(24):
+        timestamp = current_time - timedelta(hours=hour_offset)
+        
+        for zone in zones:
+            for sensor_type, (min_val, max_val), unit in sensor_types_config:
+                # Add some trend and randomness
+                base_value = random.uniform(min_val, max_val)
+                
+                # Add some realistic trends
+                if sensor_type == SensorType.SOIL_MOISTURE:
+                    # Moisture tends to decrease during day, increase at night
+                    hour = timestamp.hour
+                    if 6 <= hour <= 18:  # Daytime
+                        base_value -= random.uniform(5, 15)
+                    else:  # Nighttime
+                        base_value += random.uniform(2, 8)
+                    base_value = max(min_val, min(max_val, base_value))
+                
+                elif sensor_type in [SensorType.NUTRIENT_N, SensorType.NUTRIENT_P, SensorType.NUTRIENT_K]:
+                    # Nutrients decrease over time, spike after fertilization
+                    if hour_offset == 8 or hour_offset == 16:  # Fertilization times
+                        base_value += random.uniform(20, 40)
+                    else:
+                        base_value -= hour_offset * random.uniform(0.5, 2)
+                    base_value = max(min_val, min(max_val, base_value))
+                
+                elif sensor_type == SensorType.TEMPERATURE:
+                    # Temperature varies by time of day
+                    hour = timestamp.hour
+                    if 10 <= hour <= 16:  # Midday
+                        base_value += random.uniform(5, 10)
+                    elif hour <= 6 or hour >= 20:  # Night
+                        base_value -= random.uniform(3, 8)
+                    base_value = max(min_val, min(max_val, base_value))
+                
+                value = round(base_value, 1)
+                
+                # Determine alert level
+                alert_level = "normal"
+                if sensor_type == SensorType.SOIL_MOISTURE and value < 30:
+                    alert_level = "critical" if value < 20 else "warning"
+                elif sensor_type in [SensorType.NUTRIENT_N, SensorType.NUTRIENT_P, SensorType.NUTRIENT_K] and value < 40:
+                    alert_level = "critical" if value < 25 else "warning"
+                
+                sensor_data = SensorData(
+                    zone_id=zone["id"],
+                    sensor_type=sensor_type,
+                    value=value,
+                    unit=unit,
+                    alert_level=alert_level,
+                    timestamp=timestamp
+                )
+                
+                await db.sensor_data.insert_one(sensor_data.dict())
+                if hour_offset == 0:  # Only count current data
+                    created_sensors.append(sensor_data)
     
     # Create sample irrigation systems
     irrigation_count = await db.irrigation_systems.count_documents({})
@@ -393,17 +430,22 @@ async def simulate_sensor_data():
             )
             await db.irrigation_systems.insert_one(irrigation.dict())
     
-    # Create sample drones
+    # Create sample drones with realistic positions
     drone_count = await db.drones.count_documents({})
     if drone_count == 0:
         sample_drones = [
-            DroneData(drone_name="Drone-1", status=DroneStatus.IDLE, battery_level=85.0, current_lat=-6.2088, current_lng=106.8456, payload_remaining=75.0, payload_type="water"),
-            DroneData(drone_name="Drone-2", status=DroneStatus.CHARGING, battery_level=45.0, current_lat=-6.2090, current_lng=106.8460, payload_remaining=100.0, payload_type="fertilizer"),
+            DroneData(drone_name="Drone-1", status=DroneStatus.IDLE, battery_level=85.0, 
+                     current_lat=-6.2088, current_lng=106.8456, payload_remaining=75.0, payload_type="water"),
+            DroneData(drone_name="Drone-2", status=DroneStatus.IN_FLIGHT, battery_level=65.0, 
+                     current_lat=-6.2090, current_lng=106.8460, target_lat=-6.2085, target_lng=106.8465,
+                     payload_remaining=90.0, payload_type="fertilizer"),
+            DroneData(drone_name="Drone-3", status=DroneStatus.CHARGING, battery_level=25.0, 
+                     current_lat=-6.2085, current_lng=106.8465, payload_remaining=100.0, payload_type="pesticide"),
         ]
         for drone in sample_drones:
             await db.drones.insert_one(drone.dict())
     
-    return {"message": "Sample data generated successfully", "sensors_created": len(created_sensors)}
+    return {"message": "Historical data generated successfully", "sensors_created": len(created_sensors), "hours_generated": 24}
 
 
 # Include the router in the main app
