@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  },
+  "results": [
+    {
+      "test": "Root Endpoint",
+      "success": true,
+      "message": "Root endpoint accessible and returns correct message",
+      "timestamp": "2025-08-19T22:23:32.011224",
+      "details": null
+    },
+    {
+      "test": "Simulate Data",
+      "success": true,
+      "message": "Sample data generated successfully. Created 21 sensors",
+      "timestamp": "2025-08-19T22:23:32.583059",
+      "details": null
+    },
+    {
+      "test": "Get Zones",
+      "success": true,
+      "message": "Retrieved 3 zones with proper structure and thresholds",
+      "timestamp": "2025-08-19T22:23:33.139826",
+      "details": null
+    },
+    {
+      "test": "Get Sensors",
+      "success": true,
+      "message": "Retrieved 42 sensors with all expected types. Alert levels: 4 critical, 3 warning",
+      "timestamp": "2025-08-19T22:23:33.697980",
+      "details": null
+    },
+    {
+      "test": "Sensor Alert Logic",
+      "success": true,
+      "message": "Alert logic working correctly. Critical: 4, Warning: 3",
+      "timestamp": "2025-08-19T22:23:34.253569",
+      "details": null
+    },
+    {
+      "test": "Get Irrigation",
+      "success": true,
+      "message": "Retrieved 3 irrigation systems with valid statuses: {'idle', 'scheduled'}",
+      "timestamp": "2025-08-19T22:23:34.807939",
+      "details": null
+    },
+    {
+      "test": "Activate Irrigation",
+      "success": true,
+      "message": "Irrigation system activated successfully with duration 15 minutes",
+      "timestamp": "2025-08-19T22:23:36.414298",
+      "details": null
+    },
+    {
+      "test": "Activate Irrigation Invalid ID",
+      "success": true,
+      "message": "Correctly returned 404 for invalid irrigation system ID",
+      "timestamp": "2025-08-19T22:23:36.970289",
+      "details": null
+    },
+    {
+      "test": "Get Drones",
+      "success": true,
+      "message": "Retrieved 2 drones with valid statuses: {'idle', 'charging'}",
+      "timestamp": "2025-08-19T22:23:37.542522",
+      "details": null
+    },
+    {
+      "test": "Drone Mission",
+      "success": true,
+      "message": "Drone mission assigned successfully. Status changed to in_flight",
+      "timestamp": "2025-08-19T22:23:39.146213",
+      "details": null
+    },
+    {
+      "test": "Drone Mission Invalid ID",
+      "success": true,
+      "message": "Correctly returned 404 for invalid drone ID",
+      "timestamp": "2025-08-19T22:23:39.704792",
+      "details": null
+    },
+    {
+      "test": "Dashboard Summary",
+      "success": true,
+      "message": "Dashboard summary retrieved successfully. Zones: 3, Active Irrigation: 1, Active Drones: 1, Critical Alerts: 4",
+      "timestamp": "2025-08-19T22:23:40.264346",
+      "details": null
+    }
+  ],
+  "timestamp": "2025-08-19T22:23:40.766205"
+}
