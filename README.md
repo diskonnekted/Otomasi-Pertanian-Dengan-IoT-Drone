@@ -1,4 +1,4 @@
-# Smart Farm Monitoring System - Desa Jenggawur
+# Smart Farm Monitoring System
 
 **Real-time IoT-based agricultural monitoring and automation system for Jenggawur Village, Banjarnegara Regency, Central Java.**
 
